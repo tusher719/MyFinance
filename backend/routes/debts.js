@@ -1,0 +1,10 @@
+const router = require('express').Router();
+const { getDebts, createDebt, addPayment, updateDebt, deleteDebt } = require('../controllers/debtController');
+const { protect } = require('../middleware/auth');
+router.use(protect);
+router.get('/', getDebts);
+router.post('/', createDebt);
+router.post('/:id/payments', addPayment);
+router.put('/:id', updateDebt);
+router.delete('/:id', deleteDebt);
+module.exports = router;
