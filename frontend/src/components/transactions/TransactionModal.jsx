@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Modal from '../common/Modal';
 import { useApp } from '../../contexts/AppContext';
-import { transactionAPI, accountAPI } from '../../services/api';
+import { transactionAPI } from '../../services/api';
 import { PAYMENT_TYPES } from '../../utils/helpers';
 import { format } from 'date-fns';
 import toast from 'react-hot-toast';

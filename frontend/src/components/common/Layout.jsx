@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
   const { loadAll, unreadCount } = useApp();
   const navigate = useNavigate();
 
-  useEffect(() => { if (user) loadAll(); }, [user]);
+  useEffect(() => { if (user) loadAll(); }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="flex h-screen bg-[var(--bg)] overflow-hidden">

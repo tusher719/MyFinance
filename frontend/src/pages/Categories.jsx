@@ -215,7 +215,8 @@ const Categories = () => {
   const [editData, setEditData] = useState(null);
   const [parentData, setParentData] = useState(null);
 
-  // Delete confirm
+  // Delete confirm - handled inline via window.confirm
+  // eslint-disable-next-line no-unused-vars
   const [delTarget, setDelTarget] = useState(null);
 
   const openCreate = () => { setEditData(null); setParentData(null); setFormOpen(true); };
@@ -239,7 +240,7 @@ const Categories = () => {
       const fresh = categories.find(c => c._id === selected._id);
       setSelected(fresh || null);
     }
-  }, [categories]);
+  }, [categories]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSelectCategory = (cat) => {
     setSelected(cat);
