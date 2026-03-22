@@ -6,7 +6,7 @@ import { COLORS, CATEGORY_ICONS, NATURE_TYPES } from '../utils/helpers';
 import { APP_VERSION, BUILD_DATE, CHANGELOG } from '../version';
 import Modal from '../components/common/Modal';
 import toast from 'react-hot-toast';
-import { Plus, Trash2, Edit2, User, Bell, Shield, Palette, Tag as TagIcon, Layers, Info } from 'lucide-react';
+import { Plus, Trash2, Edit2, User, Shield, Tag as TagIcon, Layers, Info } from 'lucide-react';
 
 const TABS = [
   { id: 'profile',    label: 'Profile',     icon: User },
@@ -276,7 +276,7 @@ function AboutSettings() {
   ];
 
   const done    = PENDING_TASKS.filter(t => t.status === 'done');
-  const pending = PENDING_TASKS.filter(t => t.status === 'pending');
+  // eslint-disable-next-line no-unused-vars
   const pct     = Math.round((done.length / PENDING_TASKS.length) * 100);
 
   return (
@@ -387,7 +387,7 @@ function AboutSettings() {
         <div className="space-y-4">
           {CHANGELOG.map((release, i) => (
             <div key={release.version}>
-              <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-2 mb-2 flex-wrap">
                 <span className="px-2 py-0.5 rounded-full text-xs font-bold"
                   style={{ backgroundColor: i === 0 ? 'rgba(97,117,244,0.15)' : 'rgba(100,116,139,0.1)', color: i === 0 ? '#6175f4' : '#94a3b8', border: `1px solid ${i === 0 ? 'rgba(97,117,244,0.3)' : 'rgba(100,116,139,0.2)'}` }}>
                   v{release.version}
@@ -395,6 +395,14 @@ function AboutSettings() {
                 <span className="text-xs text-surface-400">{release.date}</span>
                 {i === 0 && <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-500 font-semibold">Latest</span>}
               </div>
+              {release.commit && (
+                <div className="mb-2 flex items-center gap-1.5">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-md truncate max-w-full"
+                    style={{ backgroundColor: 'rgba(100,116,139,0.12)', color: '#64748b', border: '1px solid rgba(100,116,139,0.2)' }}>
+                    git: {release.commit}
+                  </span>
+                </div>
+              )}
               <div className="space-y-1 pl-2">
                 {release.changes.map(ch => (
                   <div key={ch} className="flex items-start gap-2">

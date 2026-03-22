@@ -36,7 +36,7 @@ export default function Transactions() {
     finally { setLoading(false); }
   }, [filters, search]);
 
-  useEffect(() => { fetchTx(1); setPage(1); }, [filters, search]);
+  useEffect(() => { fetchTx(1); setPage(1); }, [filters, search]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleEdit = (tx) => { setEditingTx(tx); setShowModal(true); };
   const handleDelete = async (tx) => {

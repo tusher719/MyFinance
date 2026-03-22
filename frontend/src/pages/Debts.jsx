@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, HandCoins, Calendar, TrendingDown, TrendingUp } from 'lucide-react';
+import { Plus, Calendar, TrendingDown, TrendingUp } from 'lucide-react';
 import { debtAPI } from '../services/api';
 import { useApp } from '../contexts/AppContext';
 import { formatCurrency, formatDate } from '../utils/helpers';

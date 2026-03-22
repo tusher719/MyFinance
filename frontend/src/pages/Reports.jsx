@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend, LineChart, Line } from 'recharts';
-import { statsAPI, transactionAPI } from '../services/api';
-import { formatCurrency, getDateRange, DATE_PRESETS } from '../utils/helpers';
+import { BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
+import { statsAPI } from '../services/api';
+import { formatCurrency, getDateRange } from '../utils/helpers';
 import FilterBar from '../components/common/FilterBar';
 import { useApp } from '../contexts/AppContext';
 
@@ -23,7 +23,7 @@ export default function Reports() {
   const [filters, setFilters] = useState({ datePreset: '6m' });
   const [dashData, setDashData] = useState(null);
   const [spendData, setSpendData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {

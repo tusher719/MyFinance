@@ -16,6 +16,7 @@ export const CHANGELOG = [
   {
     version: '1.1.0',
     date: 'March 2026',
+    commit: 'feat: calculator popup, live balance, amount UI redesign',
     changes: [
       'Calculator popup — amount input click করলে popup খোলে',
       'Live account balance modal-এর ভেতরে real-time দেখায়',
@@ -27,6 +28,7 @@ export const CHANGELOG = [
   {
     version: '1.0.0',
     date: 'March 2026',
+    commit: 'feat: initial release - icon fix, custom dropdowns, modal redesign',
     changes: [
       'LucideIcon style prop fix — icon color কাজ করে',
       'Category dropdown — icon + search + nested indent',

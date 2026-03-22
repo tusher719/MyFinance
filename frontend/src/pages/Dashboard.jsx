@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { TrendingUp, TrendingDown, Wallet, Target, Plus, ArrowRight } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 import { statsAPI } from '../services/api';
-import { formatCurrency, formatDateTime } from '../utils/helpers';
+import { formatCurrency } from '../utils/helpers';
 import { useApp } from '../contexts/AppContext';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import Skeleton, { SkeletonCard } from '../components/common/Skeleton';
+import { SkeletonCard } from '../components/common/Skeleton';
 import TransactionModal from '../components/transactions/TransactionModal';
 import TransactionRow from '../components/transactions/TransactionRow';
 
