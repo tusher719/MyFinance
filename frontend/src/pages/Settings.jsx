@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useApp } from '../contexts/AppContext';
 import { categoryAPI, tagAPI } from '../services/api';
 import { COLORS, CATEGORY_ICONS, NATURE_TYPES } from '../utils/helpers';
-import { APP_VERSION, BUILD_DATE, CHANGELOG } from '../version';
+import { APP_VERSION, BUILD_DATE, CHANGELOG, TASKS, FUTURE_FEATURES, TECH_STACK } from '../version';
 import Modal from '../components/common/Modal';
 import toast from 'react-hot-toast';
 import { Plus, Trash2, Edit2, User, Shield, Tag as TagIcon, Layers, Info } from 'lucide-react';
@@ -210,79 +210,19 @@ function SecuritySettings() {
 }
 
 function AboutSettings() {
+  const done      = TASKS.filter(t => t.status === 'done');
+  const pct       = Math.round((done.length / TASKS.length) * 100);
 
-  const PENDING_TASKS = [
-    { id: 1, label: 'Transaction list-এ icon দেখানো', status: 'done' },
-    { id: 2, label: 'Category dropdown — icon + search UI', status: 'done' },
-    { id: 3, label: 'Tags search dropdown', status: 'done' },
-    { id: 4, label: 'Status custom dropdown', status: 'done' },
-    { id: 5, label: 'Tab-wise modal color theming', status: 'done' },
-    { id: 6, label: 'Amount UI redesign + sign badge', status: 'done' },
-    { id: 7, label: 'Calculator popup (click-to-open)', status: 'done' },
-    { id: 8, label: 'Calculator bugs fix', status: 'done' },
-    { id: 9, label: 'Payer field যোগ', status: 'done' },
-    { id: 10, label: 'Add Record + Another Record button', status: 'done' },
-    { id: 11, label: 'LocalStorage-এ preferences persist', status: 'done' },
-    { id: 12, label: 'Live account balance modal-এ', status: 'done' },
-    { id: 13, label: 'Settings → About page', status: 'done' },
-    { id: 14, label: 'Version system (version.js)', status: 'done' },
-    { id: 15, label: 'Dashboard charts উন্নত করা', status: 'pending' },
-    { id: 16, label: 'Debt tracker page improve করা', status: 'pending' },
-    { id: 17, label: 'Export to Excel / PDF', status: 'pending' },
-    { id: 18, label: 'Budget over-alert notification', status: 'pending' },
-    { id: 19, label: 'Dark/Light theme manual toggle', status: 'pending' },
-    { id: 20, label: 'Search by amount range / date range', status: 'pending' },
-    { id: 21, label: 'Recurring transaction auto-create', status: 'pending' },
-    { id: 22, label: 'Mobile PWA install support', status: 'pending' },
-  ];
-
-  const FUTURE_FEATURES = [
-    {
-      icon: '📱',
-      title: 'Mobile App (PWA)',
-      desc: 'Browser থেকে "Add to Home Screen" করলেই app-এর মতো কাজ করবে। Push notification, offline mode support।',
-      steps: ['manifest.json আপডেট করো', 'Service Worker যোগ করো', 'Offline cache setup করো'],
-    },
-    {
-      icon: '🖥️',
-      title: 'Desktop App (Electron)',
-      desc: 'Electron দিয়ে Windows/Mac/Linux desktop app বানানো যাবে। System tray, local backup সহ।',
-      steps: ['electron + electron-builder install করো', 'main.js entry point বানাও', 'npm run build করে package করো'],
-    },
-    {
-      icon: '📊',
-      title: 'Advanced Reports',
-      desc: 'Monthly/yearly comparison, category-wise spending trend, net worth tracker, custom date range charts।',
-      steps: ['নতুন /api/stats/advanced endpoint বানাও', 'Recharts-এ AreaChart/ComposedChart যোগ করো', 'PDF export (jsPDF) যোগ করো'],
-    },
-    {
-      icon: '🔔',
-      title: 'Smart Notifications',
-      desc: 'Budget limit পৌঁছালে, debt due date আসলে, বড় transaction হলে — email বা in-app alert।',
-      steps: ['nodemailer setup করো backend-এ', 'Cron job already আছে — alert logic যোগ করো', 'Frontend notification center improve করো'],
-    },
-    {
-      icon: '🌐',
-      title: 'Multi-Currency',
-      desc: 'BDT, USD, EUR — যেকোনো currency-তে transaction রাখো। Live exchange rate API দিয়ে auto convert।',
-      steps: ['Exchange rate API (exchangerate-api.com) যোগ করো', 'Transaction model-এ currency field যোগ করো', 'Dashboard-এ currency switcher বানাও'],
-    },
-    {
-      icon: '👥',
-      title: 'Multi-User / Family',
-      desc: 'একই account-এ পরিবারের সবাই access করতে পারবে। Role-based permission সহ।',
-      steps: ['User model-এ family/group concept যোগ করো', 'Invite system বানাও (email link)', 'Permission middleware আপডেট করো'],
-    },
-  ];
-
-  const done    = PENDING_TASKS.filter(t => t.status === 'done');
-  // eslint-disable-next-line no-unused-vars
-  const pct     = Math.round((done.length / PENDING_TASKS.length) * 100);
+  const statusCfg = {
+    done:       { label: 'Done',        dot: 'bg-emerald-500', badge: 'bg-emerald-500/15 text-emerald-500', line: 'line-through text-surface-400' },
+    inprogress: { label: 'In Progress', dot: 'bg-blue-500',    badge: 'bg-blue-500/15 text-blue-500',       line: 'text-blue-400' },
+    pending:    { label: 'Pending',     dot: 'bg-amber-400',   badge: 'bg-amber-500/15 text-amber-500',     line: 'text-surface-600 dark:text-surface-300' },
+  };
 
   return (
     <div className="space-y-6">
 
-      {/* ── App Header ── */}
+      {/* App Header */}
       <div className="rounded-2xl p-6 text-center"
         style={{ background: 'linear-gradient(135deg, rgba(97,117,244,0.15) 0%, rgba(16,185,129,0.10) 100%)', border: '1px solid rgba(97,117,244,0.25)' }}>
         <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-3 text-3xl"
@@ -295,18 +235,11 @@ function AboutSettings() {
         </div>
       </div>
 
-      {/* ── Tech Stack ── */}
+      {/* Tech Stack */}
       <div className="card p-4">
         <h3 className="text-sm font-semibold text-surface-700 dark:text-surface-300 mb-3">Tech Stack</h3>
         <div className="grid grid-cols-2 gap-2">
-          {[
-            { label: 'Frontend', value: 'React 18 + Tailwind CSS' },
-            { label: 'Backend',  value: 'Node.js + Express'       },
-            { label: 'Database', value: 'MongoDB + Mongoose'       },
-            { label: 'Auth',     value: 'JWT + bcrypt'             },
-            { label: 'Charts',   value: 'Recharts'                 },
-            { label: 'Icons',    value: 'Lucide React'             },
-          ].map(item => (
+          {TECH_STACK.map(item => (
             <div key={item.label} className="bg-surface-50 dark:bg-surface-800 rounded-xl px-3 py-2">
               <p className="text-[10px] text-surface-400 uppercase tracking-wide">{item.label}</p>
               <p className="text-xs font-semibold text-surface-700 dark:text-surface-200 mt-0.5">{item.value}</p>
@@ -315,48 +248,35 @@ function AboutSettings() {
         </div>
       </div>
 
-      {/* ── Task Progress ── */}
+      {/* Task Progress */}
       <div className="card p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-sm font-semibold text-surface-700 dark:text-surface-300">Task Progress</h3>
-          <span className="text-xs font-bold" style={{ color: '#6175f4' }}>{done.length}/{PENDING_TASKS.length} done</span>
+          <span className="text-xs font-bold" style={{ color: '#6175f4' }}>{done.length}/{TASKS.length} done · {pct}%</span>
         </div>
-        {/* Progress bar */}
         <div className="w-full h-2 bg-surface-100 dark:bg-surface-700 rounded-full overflow-hidden mb-4">
           <div className="h-full rounded-full transition-all duration-700"
             style={{ width: `${pct}%`, background: 'linear-gradient(90deg, #6175f4, #10b981)' }} />
         </div>
-
-        <div className="grid grid-cols-1 gap-1.5">
-          {PENDING_TASKS.map(task => (
-            <div key={task.id} className="flex items-center gap-2.5 py-1">
-              <div className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 text-[10px] ${
-                task.status === 'done'
-                  ? 'bg-emerald-500/20 text-emerald-500'
-                  : 'bg-amber-500/15 text-amber-500'
-              }`}>
-                {task.status === 'done' ? '✓' : '○'}
+        <div className="grid grid-cols-1 gap-1">
+          {TASKS.map(task => {
+            const cfg = statusCfg[task.status] || statusCfg.pending;
+            return (
+              <div key={task.id} className="flex items-center gap-2.5 py-1">
+                <span className={`w-2 h-2 rounded-full shrink-0 ${cfg.dot}`} />
+                <p className={`text-xs flex-1 ${cfg.line}`}>{task.label}</p>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-semibold shrink-0 ${cfg.badge}`}>
+                  {cfg.label}
+                </span>
               </div>
-              <p className={`text-xs flex-1 ${task.status === 'done' ? 'text-surface-400 line-through' : 'text-surface-600 dark:text-surface-300'}`}>
-                {task.label}
-              </p>
-              <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-semibold shrink-0 ${
-                task.status === 'done'
-                  ? 'bg-emerald-500/15 text-emerald-500'
-                  : 'bg-amber-500/15 text-amber-500'
-              }`}>
-                {task.status === 'done' ? 'Done' : 'Pending'}
-              </span>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
-      {/* ── Future Improvements (Grid) ── */}
+      {/* Future Features */}
       <div className="card p-4">
-        <h3 className="text-sm font-semibold text-surface-700 dark:text-surface-300 mb-4">
-          🚀 কীভাবে App আরো উন্নত করা যায়
-        </h3>
+        <h3 className="text-sm font-semibold text-surface-700 dark:text-surface-300 mb-4">🚀 কীভাবে App আরো উন্নত করা যায়</h3>
         <div className="grid grid-cols-1 gap-3">
           {FUTURE_FEATURES.map(f => (
             <div key={f.title} className="rounded-xl p-3.5"
@@ -381,13 +301,13 @@ function AboutSettings() {
         </div>
       </div>
 
-      {/* ── Changelog ── */}
+      {/* Changelog */}
       <div className="card p-4">
         <h3 className="text-sm font-semibold text-surface-700 dark:text-surface-300 mb-4">📋 Changelog</h3>
         <div className="space-y-4">
           {CHANGELOG.map((release, i) => (
             <div key={release.version}>
-              <div className="flex items-center gap-2 mb-2 flex-wrap">
+              <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                 <span className="px-2 py-0.5 rounded-full text-xs font-bold"
                   style={{ backgroundColor: i === 0 ? 'rgba(97,117,244,0.15)' : 'rgba(100,116,139,0.1)', color: i === 0 ? '#6175f4' : '#94a3b8', border: `1px solid ${i === 0 ? 'rgba(97,117,244,0.3)' : 'rgba(100,116,139,0.2)'}` }}>
                   v{release.version}
@@ -396,8 +316,8 @@ function AboutSettings() {
                 {i === 0 && <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-500 font-semibold">Latest</span>}
               </div>
               {release.commit && (
-                <div className="mb-2 flex items-center gap-1.5">
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-md truncate max-w-full"
+                <div className="mb-2">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-md"
                     style={{ backgroundColor: 'rgba(100,116,139,0.12)', color: '#64748b', border: '1px solid rgba(100,116,139,0.2)' }}>
                     git: {release.commit}
                   </span>
@@ -420,7 +340,6 @@ function AboutSettings() {
     </div>
   );
 }
-
 export default function Settings() {
   const [activeTab, setActiveTab] = useState('profile');
   const CONTENT = { profile: ProfileSettings, categories: CategorySettings, tags: TagSettings, security: SecuritySettings, about: AboutSettings };
