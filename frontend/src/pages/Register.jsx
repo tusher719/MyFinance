@@ -28,7 +28,7 @@ export default function Register() {
       <div className="relative w-full max-w-md">
         <div className="flex items-center gap-3 justify-center mb-8">
           <div className="w-12 h-12 bg-primary-600 rounded-2xl flex items-center justify-center shadow-glow"><TrendingUp size={22} className="text-white" /></div>
-          <div><p className="font-display font-bold text-white text-xl">FinanceOS</p><p className="text-xs text-surface-400">Smart Wallet Manager</p></div>
+          <div><p className="font-display font-bold text-white text-xl">MyFinance</p><p className="text-xs text-surface-400">Smart Wallet Manager</p></div>
         </div>
         <div className="card bg-surface-900/80 backdrop-blur border-surface-800 p-8 shadow-2xl">
           <h1 className="font-display font-bold text-2xl text-white mb-1">Create account</h1>

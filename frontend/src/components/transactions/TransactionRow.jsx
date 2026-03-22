@@ -1,18 +1,13 @@
 import React from 'react';
 import { Edit2, Trash2, ArrowUpRight, ArrowDownLeft, ArrowLeftRight } from 'lucide-react';
 import { formatCurrency, formatDateTime, typeSign } from '../../utils/helpers';
+import TxIcon from './TxIcon';
 
 export default function TransactionRow({ transaction: tx, onEdit, onDelete }) {
-  const typeIcons = { income: ArrowDownLeft, expense: ArrowUpRight, transfer: ArrowLeftRight };
-  const Icon = typeIcons[tx.type] || ArrowLeftRight;
-  const iconColors = { income: 'text-emerald-500 bg-emerald-50 dark:bg-emerald-900/20', expense: 'text-red-500 bg-red-50 dark:bg-red-900/20', transfer: 'text-amber-500 bg-amber-50 dark:bg-amber-900/20' };
-
   return (
     <div className="flex items-center gap-3 px-4 py-3.5 hover:bg-surface-50 dark:hover:bg-surface-800/50 transition-colors group rounded-xl">
       {/* Icon */}
-      <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-lg ${tx.category?.icon ? '' : iconColors[tx.type]}`}>
-        {tx.category?.icon ? tx.category.icon : <Icon size={16} />}
-      </div>
+      <TxIcon icon={tx.category?.icon} color={tx.category?.color} type={tx.type} />
 
       {/* Details */}
       <div className="flex-1 min-w-0">

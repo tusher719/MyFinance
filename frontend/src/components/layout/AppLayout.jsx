@@ -37,7 +37,7 @@ export default function AppLayout() {
             <Menu size={20} className="text-surface-600 dark:text-surface-400" />
           </button>
           <div className="flex items-center gap-2">
-            <span className="font-display font-bold text-surface-900 dark:text-white">FinanceOS</span>
+            <span className="font-display font-bold text-surface-900 dark:text-white">MyFinance</span>
           </div>
           <div className="relative">
             <button className="p-2 rounded-xl hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors relative">

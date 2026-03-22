@@ -30,7 +30,7 @@ export default function Sidebar({ onClose }) {
             <TrendingUp size={18} className="text-white" />
           </div>
           <div>
-            <p className="font-display font-bold text-surface-900 dark:text-white text-base leading-tight">FinanceOS</p>
+            <p className="font-display font-bold text-surface-900 dark:text-white text-base leading-tight">MyFinance</p>
             <p className="text-xs text-surface-400">Smart Wallet</p>
           </div>
         </div>

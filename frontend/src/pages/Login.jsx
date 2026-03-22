@@ -36,7 +36,7 @@ export default function Login() {
             <TrendingUp size={22} className="text-white" />
           </div>
           <div>
-            <p className="font-display font-bold text-white text-xl">FinanceOS</p>
+            <p className="font-display font-bold text-white text-xl">MyFinance</p>
             <p className="text-xs text-surface-400">Smart Wallet Manager</p>
           </div>
         </div>

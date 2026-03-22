@@ -1,7 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { Edit2, Trash2, ArrowRight } from 'lucide-react';
-import * as LucideIcons from 'lucide-react';
+import TxIcon from './TxIcon';
 
 const STATUS_STYLES = {
   cleared:    'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400',
@@ -9,41 +9,10 @@ const STATUS_STYLES = {
   reconciled: 'bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400',
 };
 
-const isEmoji = (str) => /\p{Emoji}/u.test(str);
-
-const TransactionIcon = ({ iconName, iconColor }) => {
-  // emoji হলে directly দেখাও
-  if (iconName && isEmoji(iconName)) {
-    return (
-      <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-lg"
-        style={{ backgroundColor: iconColor + '22' }}>
-        {iconName}
-      </div>
-    );
-  }
-
-  // Lucide icon name হলে component render করো
-  const Comp = iconName ? LucideIcons[iconName] : null;
-  return (
-    <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-      style={{ backgroundColor: iconColor + '22' }}>
-      {Comp
-        ? <Comp size={18} style={{ color: iconColor }} />
-        : <LucideIcons.Tag size={18} style={{ color: iconColor }} />
-      }
-    </div>
-  );
-};
-
 const TransactionItem = ({ tx, onEdit, onDelete }) => {
   const isTransfer = tx.type === 'transfer';
   const isIncome   = tx.type === 'income';
   const isExpense  = tx.type === 'expense';
-
-  const iconColor = tx.category?.color
-    || (isIncome ? '#10b981' : isExpense ? '#ef4444' : '#6175f4');
-
-  const iconName = tx.category?.icon || (isTransfer ? 'ArrowLeftRight' : isIncome ? 'TrendingUp' : 'TrendingDown');
 
   const amtColor = isIncome
     ? 'text-emerald-600 dark:text-emerald-400'
@@ -56,7 +25,7 @@ const TransactionItem = ({ tx, onEdit, onDelete }) => {
   return (
     <div className="flex items-center gap-3 px-4 py-3 hover:bg-[var(--bg3)] transition-colors group">
       {/* Icon */}
-      <TransactionIcon iconName={iconName} iconColor={iconColor} />
+      <TxIcon icon={tx.category?.icon} color={tx.category?.color} type={tx.type} />
 
       {/* Info */}
       <div className="flex-1 min-w-0">
