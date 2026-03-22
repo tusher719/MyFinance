@@ -23,8 +23,8 @@ export default function TransactionRow({ transaction: tx, onEdit, onDelete }) {
         </div>
         {tx.tags?.length > 0 && (
           <div className="flex gap-1 mt-1.5">
-            {tx.tags.map(tag => (
-              <span key={tag._id} className="px-2 py-0.5 rounded-full text-[10px] font-semibold text-white" style={{ backgroundColor: tag.color }}>{tag.name}</span>
+            {tx.tags.map((tag, i) => (
+              <span key={tag._id || i} className="px-2 py-0.5 rounded-full text-[10px] font-semibold text-white" style={{ backgroundColor: tag.color }}>{tag.name}</span>
             ))}
           </div>
         )}
